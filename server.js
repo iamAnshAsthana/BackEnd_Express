@@ -1,4 +1,5 @@
 import express from "express";
+import studentRoutes from "./routes/studentRoutes.js";
 
 // This app is an object
 const app = express();
@@ -6,29 +7,16 @@ const app = express();
 app.use(express.json());
 
 // '/' is a route that sends response "Without request & response" when user visits '/' route.
-app.get("/student", function (req, res) {
-  res.status(200).send("All data of students");
-});
+app.use("/student", studentRoutes);
 
 // '/users' is a route that sends response "Without request & response" when user visits '/users' route.
-app.post("/student", function (req, res) {
-  res.send("New record of students");
-});
+app.use("/student", studentRoutes);
 
-app.get("/student/:id", function (req, res) {
-  let studentId = req.params.id;
-  res.send("New record of a student");
-});
+app.use("/student/:id", studentRoutes);
 
-app.put("/student/:id", function (req, res) {
-  let studentId = req.params.id;
-  res.send("This is the put method of a student: "+studentId);
-});
+app.use("/student/:id", studentRoutes);
 
-app.delete("/student/:id", function (req, res) {
-  let studentId = req.params.id;
-  res.send("This is the delete method of a student: " + studentId);
-});
+app.use("/student/:id", studentRoutes);
 
 // It acts as a listener which listens port 5002 nd contains a callback function that prints Started when server gets started/live.
 app.listen(5002, function (){
