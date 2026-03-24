@@ -1,11 +1,17 @@
 import express from "express";
 import studentRoutes from "./routes/studentRoutes.js";
+import conn from "./config/db.js";
 
 // This app is an object
 const app = express();
 
 app.use(express.json());
 
+app.get('/', function (req, res) {
+    conn.query("select * from users", function (error, result) {
+        res.json(result)
+    })
+});
 // '/' is a route that sends response "Without request & response" when user visits '/' route.
 app.use("/student", studentRoutes);
 // It acts as a listener which listens port 5002 nd contains a callback function that prints Started when server gets started/live.
