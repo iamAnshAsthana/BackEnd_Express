@@ -37,6 +37,14 @@ app.put('/students/:id', (req, res) => {
     });
 });
 
+app.delete('/students/:id', (req, res) => {
+    let studentId = req.params.id;
+    let query = `delete from users where id = ${studentId}`;
+    conn.query(query, (err, result) => {
+        res.status(200).json({message: "Data deleted from db users!"});
+    })
+});
+
 app.listen(5002, () => {
     console.log("Server Started");
 })
